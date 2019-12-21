@@ -4,6 +4,11 @@
     <p>
       <input type="text" v-model="search" placeholder="Buscar por nome">
     </p>
+    <p>
+      <router-link to="/collection/create">
+        <button type="button"> Cadastrar coleção </button>
+      </router-link>
+    </p>
     <table>
       <thead>
         <tr>

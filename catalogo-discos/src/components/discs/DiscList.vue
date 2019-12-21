@@ -4,8 +4,13 @@
     <p>
       <input type="text" v-model="search" placeholder="Buscar por título">
     </p>
+    <p>
+      <router-link to="/disc/create">
+        <button type="button"> Cadastrar disco </button>
+      </router-link>
+    </p>
     <table>
-      <thead>
+      <thead v-if="discList.length > 0">
         <tr>
           <th>Título</th>
           <th>Artista</th>
@@ -14,7 +19,7 @@
           <th>Ações</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody v-if="discList.length > 0">
           <tr v-for="item in filteredData" :key="item.idDisc">
               <td>{{ item.title }}</td>
               <td>{{ item.artist_name }}</td>
@@ -28,6 +33,11 @@
                   <button type="button" @click="removeDisc(item.idDisc)"> Remover </button>
               </td>
           </tr>
+      </tbody>
+      <tbody v-else>
+        <tr>
+          <td>Não há discos cadastrados.</td>
+        </tr>
       </tbody>
     </table>
   </div>
