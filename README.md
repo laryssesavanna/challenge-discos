@@ -19,7 +19,7 @@ Banco de Dados
 ## Instruções para executar o projeto:
 
 ### Clonando o projeto:
-
+No terminal execute:
 ```
 git clone https://github.com/laryssesavanna/challenge-passei-direto.git
 cd challenge-passei-direto
@@ -41,21 +41,132 @@ O script SQL encontra-se disponível no diretório /challenge-passei-direto/data
 
 ### Executando o backend:
 
-Na pasta raiz do projeto execute:
+Na pasta raiz do projeto, execute no terminal:
 ```
 cd catalog-backend
 npm install
-node server.js
 
+```
+Utilizando um editor de texto, altere as credenciais do banco de dados, caso seja necessário, no arquivo /src/config/connection.js
+```
+const conn = mysql.createConnection({
+    host: 'localhost',
+    port: 3306,
+    user: 'root',
+    password: '1234',
+    database: 'catalog'
+});
+```
+
+No terminal, execute o projeto com o comando:
+```
+node server.js
 ```
 O servidor estará escutando no endereço http://localhost:6001
 
 ### Executando o frontend:
 
-Na pasta raiz do projeto execute:
+Na pasta raiz do projeto, execute:
+
 ```
 cd catalogo-discos
 npm install
 npm run serve
 
 ```
+
+A aplicação estará disponível em http://localhost:8080/
+
+### API Backend
+
+## Gerenciar discos
+* 1- URL: GET /discs
+  * Lista todos os discos do banco de dados
+  * Exemplo de resposta:
+  ```
+  {
+    "status": "Success",
+    "data": [
+        {
+            "idDisc": 1,
+            "title": "Nevermind",
+            "artist_name": "Nirvana",
+            "genre": "Rock Grunge",
+            "year": "1991-07-04T03:00:00.000Z"
+        },
+        {
+            "idDisc": 2,
+            "title": "Construção",
+            "artist_name": "Chico Buarque",
+            "genre": "MPB",
+            "year": "1971-04-07T03:00:00.000Z"
+        }
+    ],
+    "message": "Query executed successfully."
+    }
+  ```
+ * 2- URL: GET /discs/:idDisc
+    * Retorna o disco com id = :idDisc
+ * 3- URL: POST /discs/
+    * Registra um novo disco no banco de dados
+    * Exemplo de corpo da requisição:
+    ```
+    {
+      "title": "Ten",
+      "artist_name": "Pearl Jam",
+      "genre": "Rock Grunge",
+      "year": "1991-10-11"
+    }
+    ```
+  * 4- URL: PUT /discs/
+    * Edita um disco no banco de dados
+    * Exemplo de corpo da requisição: exibido no Item 3
+  * 5- URL: DELETE /discs/:idDisc
+    * Remove um disco do banco de dados com id = :idDisc
+  
+  ## Gerenciar coleções
+  
+  * 1- URL: GET /collections
+    * Lista todas as coleções do banco de dados
+    * Exemplo de resposta:
+    ```
+    {
+      "status": "Success",
+      "data": [
+          {
+              "idCollection": 1,
+              "name": "Antigas",
+              "description": "Bandas dos anos 90"
+          },
+          {
+              "idCollection": 2,
+              "name": "Variadas",
+              "description": "Só as preferidas"
+          }
+      ],
+      "message": "Query executed successfully."
+      }
+    ```
+    
+  * 2- URL: GET /collections/:idColl
+    * Retorna a coleção com id = :idColl
+  * 3- URL: POST /collections
+    * Cadastra uma coleção no banco de dados
+    * Exemplo de corpo da requisição:
+    ```
+    {
+      "name": "As melhores da MPB",
+      "description": "Diversos artistas da MPB"
+    }
+    ```
+  * 4- URL: PUT /collections/:idColl
+    * Edita os dados de uma coleção
+    * Exemplo de corpo da requisição: exibido no item 3
+  * 5- URL: DELETE /collections/:idColl
+    * Remove uma coleção do banco de dados
+  * 6- URL: GET /collections/addDiscToColl/idDisc=:idDisc&idColl=:idColl
+    * Adiciona um disco em uma coleção, onde :idDisc é o id do disco e :idColl é o id da coleção
+  * 7- URL: DELETE /collections/removeDiscColl/idDisc=:idDisc&idColl=:idColl
+    * Remove um disco de uma coleção, onde :idDisc é o id do disco e :idColl é o id da coleção
+  * 8- URL: GET /collections/collecDisc/:idCollec
+    * Lista todos os discos de uma coleção, onde :idCollec é o id da coleção
