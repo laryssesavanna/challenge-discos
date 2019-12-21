@@ -24,6 +24,7 @@ Backend:
 Frontend
 - Vue.js
 - Axios
+- Flex para o layout
 
 Banco de Dados
 - MySQL
