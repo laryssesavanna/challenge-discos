@@ -18,8 +18,8 @@ CREATE TABLE IF NOT EXISTS `catalog`.`Disc` (
   `artist_name` VARCHAR(45) NOT NULL,
   `genre` VARCHAR(45) NOT NULL,
   `year` DATE NOT NULL,
-  `createdAt` DATE NOT NULL,
-  `modifiedAt` DATE NULL,
+  `createdAt` DATETIME NOT NULL,
+  `modifiedAt` DATETIME NULL,
   PRIMARY KEY (`idDisc`),
   UNIQUE INDEX `idDisc_UNIQUE` (`idDisc` ASC) VISIBLE)
 ENGINE = InnoDB;
@@ -32,8 +32,8 @@ CREATE TABLE IF NOT EXISTS `catalog`.`Collection` (
   `idCollection` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `description` VARCHAR(100) NULL,
-  `createdAt` DATE NOT NULL,
-  `modifiedAt` DATE NULL,
+  `createdAt` DATETIME NOT NULL,
+  `modifiedAt` DATETIME NULL,
   PRIMARY KEY (`idCollection`),
   UNIQUE INDEX `idCollection_UNIQUE` (`idCollection` ASC) VISIBLE)
 ENGINE = InnoDB;
@@ -51,12 +51,12 @@ CREATE TABLE IF NOT EXISTS `catalog`.`Disc_Collection` (
   CONSTRAINT `fk_Disc_has_Collection_Disc`
     FOREIGN KEY (`Disc_idDisc`)
     REFERENCES `catalog`.`Disc` (`idDisc`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Disc_has_Collection_Collection1`
     FOREIGN KEY (`Collection_idCollection`)
     REFERENCES `catalog`.`Collection` (`idCollection`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 

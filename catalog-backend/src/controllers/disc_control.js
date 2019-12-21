@@ -48,15 +48,16 @@ exports.findDiscById = (idDisc, res) => {
 
     // Check if id is integer
     if (!Number.isInteger(idDisc)) {
-        errors.push('Bad Request');
+        errors.push('Invalid argument');
         response = {
             status: 'Bad Request',
             errors: errors,
-            message: 'Id must to be an integer.'
+            message: 'Id must be an integer.'
         }
         return res(response, 400);
     }
 
+    // If it's ok, continue.
     mangDB.findDisc(idDisc, (err, data) => {
         // If there is no internal error.
         if (!err) {
@@ -122,13 +123,123 @@ exports.createDisc = (req, disc, res) => {
             return res(response, 200);
         } else {
             // Something went wrong, lets save the errors and return.
-            errors.push(err.message)
+            errors.push(err.message);
             response = {
                 status: 'Internal Error',
                 errors: errors,
                 message: 'Something went wrong trying to save disc in database.'
             }
             return res(response, 500);
+        }
+    });
+}
+
+// 
+// This function edits a disc.
+//
+exports.editDisc = (req, disc, res) => {
+    let response   = null;
+    let errors     = [];
+    let invalid    = validationResult(req);
+
+    // Check if id is integer
+    if (!Number.isInteger(disc.idDisc)) {
+        errors.push('Invalid argument');
+        response = {
+            status: 'Bad Request',
+            errors: errors,
+            message: 'Id must be an integer.'
+        }
+        return res(response, 400);
+    }
+
+    // If there are invalid values, return error
+    if(!invalid.isEmpty()){
+        response = {
+            status: 'Bad Request',
+            errors: invalid.array(),
+            message: 'Invalid value on JSON object.'
+        }
+        return res(response, 400);
+    }
+
+    // Check if disc exists in database
+    this.findDiscById(disc.idDisc, (resp, code) => {
+        // If disc exists, continue.
+        if(code == 200){
+            mangDB.updateDisc(disc, (err, data)=> {
+                if (!err) {
+                    // If there is no internal error.
+                    response = {
+                        status: 'Success',
+                        data: disc,
+                        message: 'Query executed successfully.'
+                    }
+                    return res(response, 200);
+                } else {
+                    // Something went wrong, lets save the errors and return.
+                    errors.push(err.message)
+                    response = {
+                        status: 'Internal Error',
+                        errors: errors,
+                        message: 'Something went wrong trying to update disc in database.'
+                    }
+                    return res(response, 500);
+                }
+            });
+        }else{
+            // The disc doesn't exists in database
+            return res(resp, code);
+        }
+    });
+}
+
+// 
+// This function removes a disc from database.
+//
+exports.removeDisc = (idDisc, res) => {
+    let response = null;
+    let errors   = [];
+
+    // Check if id is integer
+    if (!Number.isInteger(idDisc)) {
+        errors.push('Invalid argument');
+        response = {
+            status: 'Bad Request',
+            errors: errors,
+            message: 'Id must be an integer.'
+        }
+        return res(response, 400);
+    }
+
+    // Check if disc exists in database
+    this.findDiscById(idDisc, (resp, code) => {
+        // If disc exists, continue.
+        if(code == 200){
+            mangDB.deleteDisc(idDisc, (err, data) => {
+                // If there is no internal error.
+                if (!err) {
+                    response = {
+                        status: 'Success',
+                        data: 'No Content',
+                        message: 'Query executed successfully.'
+                    }
+                    return res(response, 204);
+                }
+                else {
+                    // Something went wrong, lets save the errors and return.
+                    errors.push(err.message);
+                    response = {
+                        status: 'Internal Error',
+                        errors: errors,
+                        message: 'Something went wrong trying remove disc. Id = ' + idDisc
+                    }
+                    return res(response, 500);
+                }
+            });
+        }else{
+            // The disc doesn't exists in database
+            return res(resp, code);
         }
     });
 }

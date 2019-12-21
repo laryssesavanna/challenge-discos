@@ -1,14 +1,36 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <Menu></Menu>
+    <nav class="caixa-2">
+      <!-- Aqui tinham as <router-link to="/">Home</router-link> -->
+      <Header></Header>
+      <div class="conteudo">
+        <div class="conteudo2">
+          <router-view/>
+        </div>
+      </div>
+      <Footer></Footer>
+    </nav>
   </div>
 </template>
 
+<script>
+import Footer from '@/components/Footer.vue';
+import Header from '@/components/Header.vue';
+import Menu from '@/components/Menu.vue';
+
+export default {
+  components: {
+    Footer,
+    Header,
+    Menu,
+  },
+};
+</script>
+
 <style lang="scss">
+@import 'assets/css/style.css';
+/*
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -28,5 +50,5 @@
       color: #42b983;
     }
   }
-}
+}*/
 </style>

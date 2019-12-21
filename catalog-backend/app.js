@@ -3,7 +3,7 @@ const bodyparser = require('body-parser');
 const cors = require('cors');
 
 const discs = require('./src/services/disc_service');
-// const collections = require('./src/services/collection_service');
+const collections = require('./src/services/collection_service');
  
 const app = express();
  
@@ -12,7 +12,7 @@ app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({extended:false}));
  
 app.use("/discs", discs);
-// app.use("/collections", collections);
+app.use("/collections", collections);
  
 // The specified request is not found
 app.use((req,res,next)=> {
