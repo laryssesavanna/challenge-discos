@@ -1,6 +1,18 @@
 # challenge-passei-direto
 Criação de uma aplicação web para catálogo de discos.
 
+## Funcionalidades da aplicação
+* Cadastrar, editar e remover discos do banco de dados;
+* Cadastrar e remover coleções do banco de dados;
+* Inserir novos discos em uma coleção;
+* Excluir discos da coleção;
+* Listar todos os discos de uma coleção;
+* Listar todos os discos do banco de dados;
+* Listar todas as coleções do banco de dados;
+* Busca dinâmica na listagem de discos;
+* Busca dinâmica na listagem de coleções.
+
+
 ## Principais tecnologias utilizadas
 Gerenciador de pacotes
 - NPM
