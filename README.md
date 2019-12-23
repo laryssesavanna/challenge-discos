@@ -105,14 +105,14 @@ A aplicação estará disponível em http://localhost:8080/
             "title": "Nevermind",
             "artist_name": "Nirvana",
             "genre": "Rock Grunge",
-            "year": "1991-07-04T03:00:00.000Z"
+            "year": "1991"
         },
         {
             "idDisc": 2,
             "title": "Construção",
             "artist_name": "Chico Buarque",
             "genre": "MPB",
-            "year": "1971-04-07T03:00:00.000Z"
+            "year": "1971"
         }
     ],
     "message": "Query executed successfully."
@@ -128,7 +128,7 @@ A aplicação estará disponível em http://localhost:8080/
       "title": "Ten",
       "artist_name": "Pearl Jam",
       "genre": "Rock Grunge",
-      "year": "1991-10-11"
+      "year": "1991"
     }
     ```
   * 4- URL: PUT /discs/
