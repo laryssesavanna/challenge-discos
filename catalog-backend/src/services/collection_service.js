@@ -77,7 +77,7 @@ router.delete("/:idColl", (req, res) => {
     });
 });
 
-// URL: http://localhost:6001/collections/:idDisc&idColl=:idColl
+// URL: http://localhost:6001/collections/addDiscToColl/idDisc=:idDisc&idColl=:idColl
 // GET add disc in a collection. OK
 router.get("/addDiscToColl/idDisc=:idDisc&idColl=:idColl", (req, res) => {
     let idDisc = parseInt(req.params.idDisc);
@@ -88,7 +88,7 @@ router.get("/addDiscToColl/idDisc=:idDisc&idColl=:idColl", (req, res) => {
     });
 });
 
-// URL: http://localhost:6001/collections/:idColl
+// URL: http://localhost:6001/collections/removeDiscColl/idDisc=:idDisc&idColl=:idColl
 // DELETE disc from collection.
 router.delete("/removeDiscColl/idDisc=:idDisc&idColl=:idColl", (req, res) => {
     let idDisc = parseInt(req.params.idDisc);

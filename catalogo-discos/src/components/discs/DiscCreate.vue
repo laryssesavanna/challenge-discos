@@ -2,19 +2,27 @@
   <div>
     <h1>Cadastrar Disco</h1>
     <form>
-      <label for="discTitle">Título do Disco:</label>
-      <input v-model="disc.title" type="text" name="discTitle" />
+      <div class="success_msg"><p>{{ this.message }}</p></div>
+      <div>
+        <label for="discTitle">Título do Disco: </label>
+        <input v-model="disc.title" type="text" name="discTitle" required/>
+      </div>
       <br />
-      <label for="discArtist">Nome do Artista:</label>
-      <input v-model="disc.artist_name" type="text" name="discArtist" />
+      <div>
+        <label for="discArtist">Nome do Artista: </label>
+        <input v-model="disc.artist_name" type="text" name="discArtist" required/>
+      </div>
       <br />
-      <label for="discGenre">Gênero:</label>
-      <input v-model="disc.genre" type="text" placeholder="Ex.: Rock"
-      name="discGenre" />
+      <div>
+        <label for="discGenre">Gênero: </label>
+        <input v-model="disc.genre" type="text" placeholder="Ex.: Rock"
+        name="discGenre" required/>
+      </div>
       <br />
-      <label for="discYear">Ano de Lançamento:</label>
-      <input v-model="disc.year" type="text" placeholder="YYYY-MM-DD"
-      name="discYear" />
+      <div>
+        <label for="discYear">Ano de Lançamento: </label>
+        <input v-model="disc.year" type="number" placeholder="Ex.: 2015" name="discYear" required/>
+      </div>
       <br />
       <div>
         <button type="button" @click="saveDisc()">Salvar Disco</button>
@@ -36,6 +44,7 @@ export default {
         genre: '',
         year: '',
       },
+      message: '',
     };
   },
   props: {
@@ -47,21 +56,33 @@ export default {
   methods: {
     async saveDisc() {
       const obj = this.disc;
+      let resp = null;
+      // In case this is an update request
       if (this.idDisc) {
         const id = this.idDisc;
-        await DiscService.editDisc(id, obj);
+        resp = await DiscService.editDisc(id, obj);
       } else {
-        await DiscService.createDisc(obj);
+        resp = await DiscService.createDisc(obj);
       }
+      // If everything is ok, tell user.
+      if (resp.data.status === 'Success') {
+        // eslint-disable-next-line no-alert
+        alert('Operação realizada com sucesso.');
+      }
+      // Redirect to list disc page
+      this.$router.push('/disc/list');
     },
+    // In case this is an update request
     async loadEditDisc() {
       const id = this.idDisc;
+      // Array position (vue doesn't allow us to set the position directly)
       const pos = { media: 0 };
       const response = await DiscService.findDisc(id);
       this.disc = response.data.data[pos.media];
     },
   },
   created() {
+    // In case this is an update request
     if (this.idDisc) {
       this.loadEditDisc();
     }

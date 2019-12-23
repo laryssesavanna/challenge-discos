@@ -2,11 +2,15 @@
   <div>
     <h1>Cadastrar Coleção</h1>
     <form>
-      <label for="collNome">Nome: </label>
-      <input v-model="collection.name" type="text" name="collNome" />
+      <div>
+        <label for="collNome">Nome: </label>
+        <input v-model="collection.name" type="text" name="collNome" />
+      </div>
       <br />
-      <label for="collDescricao">Descrição: </label>
-      <input v-model="collection.description" type="text" name="collDescricao" />
+      <div>
+        <label for="collDescricao">Descrição: </label>
+        <input v-model="collection.description" type="text" name="collDescricao" />
+      </div>
       <br/>
       <div>
         <button type="button" @click="saveCollection()">Salvar Coleção</button>
@@ -31,7 +35,13 @@ export default {
   methods: {
     async saveCollection() {
       const obj = this.collection;
-      await CollectionService.createCollection(obj);
+      const resp = await CollectionService.createCollection(obj);
+
+      if (resp.data.status === 'Success') {
+        // eslint-disable-next-line no-alert
+        alert('Operação realizada com sucesso.');
+      }
+      this.$router.push('/collection/list');
     },
   },
 };

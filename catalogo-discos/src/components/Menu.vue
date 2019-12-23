@@ -1,6 +1,6 @@
 <template>
   <nav class="menu-lateral">
-    <h1>Menu</h1>
+    <h1 class="menu-title">Menu</h1>
     <ul>
       <li>
         <router-link to="/">Home</router-link>

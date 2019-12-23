@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `catalog`.`Disc` (
   `title` VARCHAR(45) NOT NULL,
   `artist_name` VARCHAR(45) NOT NULL,
   `genre` VARCHAR(45) NOT NULL,
-  `year` DATE NOT NULL,
+  `year` VARCHAR(4) NOT NULL,
   `createdAt` DATETIME NOT NULL,
   `modifiedAt` DATETIME NULL,
   PRIMARY KEY (`idDisc`),

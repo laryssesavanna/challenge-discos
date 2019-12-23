@@ -29,7 +29,6 @@
                   <router-link :to="{ path: '/disc/edit/'+ item.idDisc }">
                     <button type="button"> Editar </button>
                   </router-link>
-                  <button type="button"> Adicionar à coleção </button>
                   <button type="button" @click="removeDisc(item.idDisc)"> Remover </button>
               </td>
           </tr>
@@ -61,6 +60,7 @@ export default {
     };
   },
   computed: {
+    // Filtering data for dynamic search field
     filteredData() {
       return this.discList.filter(item => item.title.toLowerCase()
         .match(this.search.toLowerCase()));

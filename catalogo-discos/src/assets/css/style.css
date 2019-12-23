@@ -32,8 +32,12 @@ footer, .header-style {
   background: #1A194C;
   height: 10vh;
 }
-footer, .header-style, .conteudo2, nav {
+footer, .conteudo2 {
   padding: 1em;
+}
+
+.header-style, .menu-title{
+  padding-left: 10px;
 }
 
 /* DESIGN TABLES */
@@ -49,4 +53,9 @@ table, td, th {
 }
 footer {
   color: #D7E8D4;
+}
+
+.success_msg{
+  color: green;
+  font-weight: bold;
 }

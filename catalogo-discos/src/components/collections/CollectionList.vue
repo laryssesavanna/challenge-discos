@@ -10,14 +10,14 @@
       </router-link>
     </p>
     <table>
-      <thead>
+      <thead v-if="collectionList.length > 0">
         <tr>
           <th>Nome</th>
           <th>Descrição</th>
           <th>Ações</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody v-if="collectionList.length > 0">
           <tr v-for="item in filteredData" :key="item.idCollection">
               <td>{{ item.name }}</td>
               <td>{{ item.description }}</td>
@@ -28,6 +28,11 @@
                   <button type="button" @click="removeColl(item.idCollection)"> Remover </button>
               </td>
           </tr>
+      </tbody>
+      <tbody v-else>
+        <tr>
+          <td>Não há coleções cadastradas.</td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -49,6 +54,7 @@ export default {
     };
   },
   computed: {
+    // Filtering data for dynamic search field
     filteredData() {
       return this.collectionList.filter(item => item.name.toLowerCase()
         .match(this.search.toLowerCase()));
