@@ -40,13 +40,13 @@ cd challenge-passei-direto
 
 ### Criando o banco de dados e tabelas
 
-O script SQL encontra-se disponível no diretório /challenge-passei-direto/database/scripts_catalog.sql
+O script SQL encontra-se disponível no diretório /challenge-passei-direto/database/catalog.sql
 
 1- Abra o MySQL
 
 2- Clique na opção para abrir um arquivo de Script SQL
 
-3- Selecione o arquivo scripts_catalog.sql
+3- Selecione o arquivo catalog.sql
 
 4- Execute o script
 
