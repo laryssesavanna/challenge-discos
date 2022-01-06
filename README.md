@@ -1,4 +1,4 @@
-# challenge-passei-direto
+# challenge-discos
 Criação de uma aplicação web para catálogo de discos.
 
 ## Funcionalidades da aplicação
@@ -34,13 +34,13 @@ Banco de Dados
 ### Clonando o projeto:
 No terminal execute:
 ```
-git clone https://github.com/laryssesavanna/challenge-passei-direto.git
-cd challenge-passei-direto
+git clone https://github.com/laryssesavanna/challenge-discos.git
+cd challenge-discos
 ```
 
 ### Criando o banco de dados e tabelas
 
-O script SQL encontra-se disponível no diretório /challenge-passei-direto/database/catalog.sql
+O script SQL encontra-se disponível no diretório /challenge-discos/database/catalog.sql
 
 1- Abra o MySQL
 
